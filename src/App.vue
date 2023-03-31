@@ -1,30 +1,56 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
+<script>
+
+//Components
+import AppHeader from './components/AppHeader.vue';
+import PosterCollection from './components/PosterCollection.vue';
+
+//Global State
+import { store } from './store.js';
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      store
+    }
+  },
+  components: {
+    AppHeader,
+    PosterCollection
+  },
+  methods: {
+    performSearch() {
+
+      //Query Movies
+      axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.store.apiKey}&language=${this.store.searchLanguage}&query=${this.store.searchQuery}`)
+        .then(response => {
+          this.store.respMovies = response.data.results;
+        });
+
+      //Query Movies
+      axios.get(`https://api.themoviedb.org/3/search/tv?api_key=${this.store.apiKey}&language=${this.store.searchLanguage}&query=${this.store.searchQuery}`)
+        .then(response => {
+          this.store.respSeries = response.data.results;
+        });
+
+    }
+  }
+}
+
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <header>
+    <!-- Top Navbar -->
+    <AppHeader @search="performSearch" />
+  </header>
+
+  <main>
+    <!-- Posters Wrapper -->
+    <PosterCollection />
+  </main>
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
+<style lang="scss">
+@use './styles/global.scss';
 </style>

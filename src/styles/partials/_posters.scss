@@ -1,0 +1,96 @@
+// Dependencies
+@use './colors' as *;
+
+/* Poster Component */
+
+.poster {
+    //Poster variables
+    $radius : 15px;
+
+
+    padding: 10px;
+    position: relative;
+
+    &:hover {
+        width: 200px;
+    }
+
+
+    & .content {
+        display: flex;
+        border-radius: $radius;
+        height: 300px;
+        transition: all .2s ease;
+        z-index: 999;
+
+
+        &:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 5px 15px 5px rgba(0, 0, 0, 0.42);
+            position: absolute;
+        }
+
+        &:hover .poster-thumbnail img {
+            border-radius: $radius 0px 0px $radius;
+        }
+
+        & .poster-thumbnail {
+
+            & img {
+                height: 100%;
+                object-fit: cover;
+                border-radius: $radius;
+            }
+
+        }
+
+        & .poster-details {
+            display: none;
+            background-color: #181818;
+            color: white;
+            border-radius: 0px $radius $radius 0px;
+        }
+
+        &:hover .poster-details {
+            display: block;
+            padding: 15px;
+            animation: posterHover .4s ease;
+            width: 300px;
+
+        }
+
+        &:hover .details {
+            animation: detailsReveal .5s ease;
+        }
+
+    }
+
+}
+
+/* Animations */
+
+@keyframes posterHover {
+    0% {
+        width: 0px;
+    }
+
+    100% {
+        width: 300px;
+    }
+}
+
+@keyframes detailsReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    60% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
