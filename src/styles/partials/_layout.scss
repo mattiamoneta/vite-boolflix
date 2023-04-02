@@ -152,6 +152,49 @@
 
 
 
+.ml-1 {
+    margin-left: .2rem;
+}
+
+.ml-2 {
+    margin-left: .5rem;
+}
+
+.ml-3 {
+    margin-left: .8rem;
+}
+
+.ml-4 {
+    margin-left: .1rem;
+}
+
+.ml-5 {
+    margin-left: 1.2rem;
+}
+
+
+.mr-1 {
+    margin-right: .2rem;
+}
+
+.mr-2 {
+    margin-right: .5rem;
+}
+
+.mr-3 {
+    margin-right: .8rem;
+}
+
+.mr-4 {
+    margin-right: .1rem;
+}
+
+.mr-5 {
+    margin-right: 1.2rem;
+}
+
+
+
 /* Paddings */
 
 .p-1 {
@@ -251,4 +294,14 @@
 
 .text-right {
     text-align: right;
+}
+
+/* Align */
+
+.v-center{
+    vertical-align: middle;
+}
+
+.v-super{
+    vertical-align: super;
 }

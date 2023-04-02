@@ -21,6 +21,9 @@ export default {
                 <input type="text" v-model="this.store.searchQuery" @keyup.enter="$emit('search')" placeholder="Cerca...">
                 <button @click="$emit('search')" class="btn btn-dark-textual btn-rounded"><i
                         class="fa-solid fa-magnifying-glass"></i></button>
+                <div class="user-profile">
+                    <img src="/userpicture.jpg" alt="">
+                </div>
             </div>
         </div>
     </div>

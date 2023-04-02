@@ -21,27 +21,52 @@ export default {
     AppFooter
   },
   methods: {
+    defaultBackground(path) {
+      this.store.fullscreenBackground = `https://image.tmdb.org/t/p/w500${path}`;
+    },
+
     performSearch() {
 
-      //Query Movies
-      axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.store.apiKey}&language=${this.store.searchLanguage}&query=${this.store.searchQuery}`)
-        .then(response => {
-          this.store.respMovies = response.data.results;
-        });
+      if (store.searchQuery != "") {
 
-      //Query Series
-      axios.get(`https://api.themoviedb.org/3/search/tv?api_key=${this.store.apiKey}&language=${this.store.searchLanguage}&query=${this.store.searchQuery}`)
-        .then(response => {
-          this.store.respSeries = response.data.results;
-        });
+        this.store.filteredMovies = [];
+        this.store.filteredSeries = [];
 
-      this.store.searchQuery = "";
+        //Query Movies
+        axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.store.apiKey}&language=${this.store.searchLanguage}&query=${this.store.searchQuery}`)
+          .then(response => {
+            this.store.respMovies = response.data.results;
+
+            if (this.store.respMovies.length > 0) {
+              this.defaultBackground(this.store.respMovies[0].poster_path);
+            }
+
+          });
+
+        //Query Series
+        axios.get(`https://api.themoviedb.org/3/search/tv?api_key=${this.store.apiKey}&language=${this.store.searchLanguage}&query=${this.store.searchQuery}`)
+          .then(response => {
+            this.store.respSeries = response.data.results;
+          });
+
+        this.store.searchQuery = "";
+
+
+      }
 
     },
 
     filterMoviesGenres(genre) {
 
+      this.store.respMoviesGenres.genres.forEach(e => {
+        if (e.id == genre) {
+          this.store.stringCurMoviesGenre = e.name;
+        }
+      });
+
       if (genre != 0) {
+
+
         this.store.filteredMovies = this.store.respMovies.filter(item => {
           if (item.genre_ids.includes(genre)) {
             return true;
@@ -63,7 +88,15 @@ export default {
     },
 
     filterSeriesGenres(genre) {
+
+      this.store.respSeriesGenres.genres.forEach(e => {
+        if (e.id == genre) {
+          this.store.stringCurSeriesGenre = e.name;
+        }
+      });
+
       if (genre != 0) {
+
         this.store.filteredSeries = this.store.respSeries.filter(item => {
           if (item.genre_ids.includes(genre)) {
             return true;
@@ -114,9 +147,11 @@ export default {
     <AppHeader @search="performSearch" />
   </header>
 
-  <main class="navbar-fix">
-    <!-- Posters Wrapper -->
-    <PosterCollection @moviesGenre="filterMoviesGenres" @seriesGenre="filterSeriesGenres" />
+  <main :style="{ 'background-image': 'url(' + store.fullscreenBackground + ')' }">
+    <div class="backdrop navbar-fix">
+      <!-- Posters Wrapper -->
+      <PosterCollection @moviesGenre="filterMoviesGenres" @seriesGenre="filterSeriesGenres" />
+    </div>
   </main>
 
   <footer>

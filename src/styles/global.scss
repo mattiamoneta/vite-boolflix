@@ -24,11 +24,16 @@ body {
     font-family: "Roboto", sans-serif;
 }
 
+main {
+    transition: all .4s ease;
+    background-size: cover;
+    background-attachment: fixed;
+}
 
 /* Typo */
 
 h1 {
-    font-size: 5rem;
+    font-size: 6rem;
 }
 
 .font-condensed {

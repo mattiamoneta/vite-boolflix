@@ -12,11 +12,26 @@ header {
 
 }
 
-
 .nav-logo {
-    height: 50px;
+    height: 55px;
+    padding: 10px;
 }
 
 .navbar-fix {
     padding-top: 100px;
+    padding-bottom: 80px;
 }
+
+.user-profile{
+    display: inline-block;
+    width: 40px;
+    vertical-align: middle;
+    margin-left: 50px;
+
+    & img{
+        width: 100%;
+        object-fit: contain;
+        border-radius: 5px;
+    }
+}
+

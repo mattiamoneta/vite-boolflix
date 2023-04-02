@@ -40,11 +40,13 @@ export default {
 
             <!-- Movie Poster -->
             <div class="poster-thumbnail">
+                <span class="btn-play"><i class="fa-solid fa-circle-play"></i></span>
                 <!-- Overlay -->
                 <div class="overlay"></div>
                 <img v-if="itemObj.poster_path != undefined" :src="`https://image.tmdb.org/t/p/w500${itemObj.poster_path}`"
                     alt="">
                 <img v-else src="poster-empty.jpg" alt="">
+                <span class="title-undefined" v-show="itemObj.poster_path == undefined">{{ itemObj.name }}</span>
             </div>
 
             <!-- Movie Description -->
@@ -73,7 +75,10 @@ export default {
                             <span v-if="convertLangFlag() != false" :class="`fi fi-${convertLangFlag()}`"></span>
                             <span v-else>{{ itemObj.original_language }}</span>
                         </div>
-                        <button class="btn btn-dark-textual">More...</button>
+                        <div class="actions">
+                            <button class="btn-icon mr-3"><i class="fa-solid fa-thumbs-up"></i></button>
+                            <button class="btn-icon"><i class="fa-solid fa-plus"></i></button>
+                        </div>
                     </div>
 
                 </div>

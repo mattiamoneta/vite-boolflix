@@ -4,12 +4,44 @@
 
 /* Poster Collection */
 
+.genre-badge {
+
+    &::before {
+        content: '\25B6';
+        width: 10px;
+        height: 10px;
+        color: $color-streaming-red;
+        margin-right: 5px;
+    }
+}
+
+.title-wrapper {
+    margin-bottom: -2.5rem;
+}
+
+.backdrop {
+    background: linear-gradient(180deg, rgba($color-bg, 0.8) 0%, rgba($color-bg, 1) 65%, rgba($color-bg, 1) 100%);
+    backdrop-filter: blur(20px);
+}
+
 .poster-list {
     list-style-type: none;
     display: flex;
 }
 
 /* Poster Component */
+
+.title-undefined{
+    position: absolute;
+    color: white;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+
+}
 
 .poster {
     //Poster variables
@@ -40,11 +72,17 @@
         &:hover {
             transform: scale(1.1);
             box-shadow: 0px 5px 15px 5px rgba(0, 0, 0, 0.42);
+            cursor: pointer;
         }
 
 
         &:hover .poster-thumbnail img {
             border-radius: $radius 0px 0px $radius;
+        }
+
+        &:hover .poster-thumbnail .btn-play {
+            display: inline;
+            animation: playBtnFadeIn .5s ease-in-out;
         }
 
         &:hover .poster-thumbnail .overlay {
@@ -54,6 +92,19 @@
 
 
         & .poster-thumbnail {
+
+            & .btn-play {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 4rem;
+                color: rgba(white, .5);
+                display: none;
+                transition: all .2s ease;
+
+            }
+
 
             position: relative;
 
@@ -70,6 +121,11 @@
                 object-fit: cover;
                 border-radius: $radius;
                 height: 100%;
+            }
+
+            &:hover .btn-play {
+                color: $color-streaming-red;
+                font-size: 4.3rem;
             }
 
         }
@@ -144,5 +200,17 @@
     100% {
         opacity: 1;
         transform: translateY(0px);
+    }
+}
+
+@keyframes playBtnFadeIn {
+    0% {
+        opacity: 0;
+
+    }
+
+    100% {
+        opacity: 1;
+
     }
 }

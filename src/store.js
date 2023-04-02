@@ -12,7 +12,9 @@ export const store = reactive({
     respSeries: [],  //Array ritornato dalla query per Serie
 
     respMoviesGenres: [],
+    stringCurMoviesGenre: 'Tutti',
     respSeriesGenres: [],
+    stringCurSeriesGenre: 'Tutti',
 
     filteredMovies: [],
     filteredNoMoviesRes: false,
@@ -20,8 +22,9 @@ export const store = reactive({
     filteredNoSeriesRes: false,
 
 
-    currentYear: new Date().getFullYear()
+    currentYear: new Date().getFullYear(),
 
+    fullscreenBackground: ''
 
 });
 
