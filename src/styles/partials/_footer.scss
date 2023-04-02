@@ -1,0 +1,14 @@
+// Dependencies
+@use './colors' as *;
+
+
+/* Footer */
+
+footer {
+    background-color: $color-dark-1;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    
+}

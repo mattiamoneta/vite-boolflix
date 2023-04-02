@@ -1,1 +1,15 @@
 /* Default Colors */
+
+$color-dark-1: #111111;
+$color-dark-2: #272727;
+$color-bg: #161616;
+$color-streaming-red: #e50914;
+
+
+.text-streaming-red {
+    color: $color-streaming-red;
+}
+
+.text-white {
+    color: white;
+}

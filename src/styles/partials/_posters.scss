@@ -1,19 +1,29 @@
 // Dependencies
 @use './colors' as *;
 
+
+/* Poster Collection */
+
+.poster-list {
+    list-style-type: none;
+    display: flex;
+}
+
 /* Poster Component */
 
 .poster {
     //Poster variables
-    $radius : 15px;
+    $radius : 8px;
 
 
-    padding: 10px;
+    padding: 10px 20px;
     position: relative;
 
-    &:hover {
-        width: 200px;
-    }
+    // &:hover+.poster {
+    //     margin-left: 300px;
+    // }
+
+
 
 
     & .content {
@@ -21,39 +31,81 @@
         border-radius: $radius;
         height: 300px;
         transition: all .2s ease;
-        z-index: 999;
+        z-index: 900;
+        background-color: $color-dark-1;
+        border: 1px solid $color-dark-2;
+        overflow: hidden;
 
 
         &:hover {
             transform: scale(1.1);
             box-shadow: 0px 5px 15px 5px rgba(0, 0, 0, 0.42);
-            position: absolute;
         }
+
 
         &:hover .poster-thumbnail img {
             border-radius: $radius 0px 0px $radius;
         }
 
+        &:hover .poster-thumbnail .overlay {
+            background: linear-gradient(90deg, rgba(2, 0, 36, 0) 60%, $color-dark-1 100%);
+        }
+
+
+
         & .poster-thumbnail {
 
-            & img {
+            position: relative;
+
+            & .overlay {
+                position: absolute;
+                width: 100%;
                 height: 100%;
+                background-color: transparent;
+                transition: all .7s ease;
+            }
+
+            & img {
+                width: 200px;
                 object-fit: cover;
                 border-radius: $radius;
+                height: 100%;
             }
 
         }
 
         & .poster-details {
             display: none;
-            background-color: #181818;
             color: white;
             border-radius: 0px $radius $radius 0px;
+
+            & .details {
+                position: relative;
+                height: 100%;
+
+                & .bottom-section {
+                    position: absolute;
+                    left: 0;
+                    bottom: 10px;
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                }
+
+                & .description {
+                    font-size: .8rem;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
         }
+
+
 
         &:hover .poster-details {
             display: block;
-            padding: 15px;
+            padding: 15px 25px 10px 15px;
             animation: posterHover .4s ease;
             width: 300px;
 

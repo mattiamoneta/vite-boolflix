@@ -35,32 +35,54 @@ export default {
 </script>
 
 <template>
-    <div class="poster">
+    <li class="poster">
         <div class="content">
+
+            <!-- Movie Poster -->
             <div class="poster-thumbnail">
-                <img :src="`https://image.tmdb.org/t/p/w500${itemObj.poster_path}`" alt="">
+                <!-- Overlay -->
+                <div class="overlay"></div>
+                <img v-if="itemObj.poster_path != undefined" :src="`https://image.tmdb.org/t/p/w500${itemObj.poster_path}`"
+                    alt="">
+                <img v-else src="poster-empty.jpg" alt="">
             </div>
+
+            <!-- Movie Description -->
             <div class="poster-details">
-                <div class="details">
-                    <h5 v-if="itemType == 'movie'">{{ itemObj.title }}</h5>
-                    <h5 v-else>{{ itemObj.name }}</h5>
+                <div class="details pt-2">
 
-                    <h5 v-if="itemType == 'movie'">{{ itemObj.original_title }}</h5>
-                    <h5 v-else>{{ itemObj.original_name }}</h5>
+                    <h2 class="font-condensed mb-3" v-if="itemType == 'movie'">{{ itemObj.title }}</h2>
+                    <h2 class="font-condensed mb-3" v-else>{{ itemObj.name }}</h2>
 
-                    <span v-if="convertLangFlag() != false" :class="`fi fi-${convertLangFlag()}`"></span>
-                    <span v-else>{{ itemObj.original_language }}</span>
+                    <h5 class="mb-2" v-if="itemType == 'movie'">{{ itemObj.original_title }}</h5>
+                    <h5 class="mb-2" v-else>{{ itemObj.original_name }}</h5>
 
-                    <div class="vote">
+
+
+                    <div class="vote text-streaming-red mb-5">
                         <i v-for="star in voteConverter()" class="fa-solid fa-star"></i>
                         <i v-for="star in (5 - voteConverter())" class="fa-regular fa-star"></i>
                     </div>
 
+                    <p class="description">
+                        {{ itemObj.overview }}
+                    </p>
+
+                    <div class="bottom-section">
+                        <div class="flag">
+                            <span v-if="convertLangFlag() != false" :class="`fi fi-${convertLangFlag()}`"></span>
+                            <span v-else>{{ itemObj.original_language }}</span>
+                        </div>
+                        <button class="btn btn-dark-textual">More...</button>
+                    </div>
 
                 </div>
             </div>
+
+
+
         </div>
-    </div>
+    </li>
 </template>
 
 <style lang="scss">

@@ -11,6 +11,18 @@ export const store = reactive({
     respMovies: [], //Array ritornato dalla query per Film
     respSeries: [],  //Array ritornato dalla query per Serie
 
+    respMoviesGenres: [],
+    respSeriesGenres: [],
+
+    filteredMovies: [],
+    filteredNoMoviesRes: false,
+    filteredSeries: [],
+    filteredNoSeriesRes: false,
+
+
+    currentYear: new Date().getFullYear()
+
+
 });
 
 // Film:    https://api.themoviedb.org/3/search/movie?api_key=ee9477622fd438eb5e8774f9d79daa52&language=it&query=nome+film

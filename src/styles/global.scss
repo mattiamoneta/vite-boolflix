@@ -2,5 +2,43 @@
 @use './partials/colors' as *;
 @use './partials/layout' as *;
 @use './partials/posters' as *;
+@use './partials/controls' as *;
+@use './partials/navbar' as *;
+@use './partials/footer' as *;
+
+@import "@fontsource/roboto";
+@import "@fontsource/roboto-condensed";
 
 /* Global CSS */
+
+*,
+::before,
+::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: $color-bg;
+    font-family: "Roboto", sans-serif;
+}
+
+
+/* Typo */
+
+h1 {
+    font-size: 5rem;
+}
+
+.font-condensed {
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+.font-light {
+    font-weight: lighter;
+}
+
+.small {
+    font-size: .8rem;
+}
