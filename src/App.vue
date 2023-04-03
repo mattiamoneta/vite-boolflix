@@ -29,6 +29,7 @@ export default {
 
       if (store.searchQuery != "") {
 
+        this.store.showModal = false;
         this.store.filteredMovies = [];
         this.store.filteredSeries = [];
 

@@ -20,8 +20,9 @@ export default {
 </script>
 
 <template>
-    <div class="modal-overlay" @wheel.prevent :style="{ 'padding-top': (store.scrollPos + 100) + 'px' }">
-        <div class="modal">
+    <div class="modal-overlay" @wheel.prevent @click="this.store.showModal = false"
+        :style="{ 'padding-top': (store.scrollPos + 100) + 'px' }">
+        <div class="modal" @click.stop>
             <div class="modal-thumbnail">
                 <div class="overlay"></div>
                 <img v-if="store.modalObj.poster_path != undefined"
