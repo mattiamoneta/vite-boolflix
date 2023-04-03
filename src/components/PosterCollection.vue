@@ -78,6 +78,11 @@ export default {
 
 <template>
     <AppModal v-if="store.showModal == true && store.modalObj != null" />
+    <div v-show="store.respMovies.length == 0 || store.respSeries.length == 0" class="splash-screen">
+        <i class="fa-3x fa-solid fa-magnifying-glass text-white mb-5"></i>
+        <h2 class="text-white">Per iniziare, digita una chiave di ricerca</h2>
+        <img src="/logo.png" alt="" class="logo-inline">
+    </div>
     <div v-show="store.respMovies.length > 0 || store.respSeries.length > 0"
         class="wrapper-lg py-5 p-relative poster-collection">
 

@@ -78,8 +78,7 @@ export default {
                         </div>
                         <div class="actions">
                             <button class="btn-icon mr-3"><i class="fa-solid fa-thumbs-up"></i></button>
-                            <button class="btn-icon" @click="$emit('toggle-modal')"><i
-                                    class="fa-solid fa-up-right-and-down-left-from-center"></i></button>
+                            <button class="btn-icon"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></button>
                         </div>
                     </div>
 
