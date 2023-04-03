@@ -3,6 +3,7 @@ export default {
     name: 'PosterItem',
     data() {
         return {
+            emits: ['toggle-modal']
         }
     },
     props: {
@@ -50,7 +51,7 @@ export default {
             </div>
 
             <!-- Movie Description -->
-            <div class="poster-details">
+            <div class="poster-details" @click="$emit('toggle-modal')">
                 <div class="details pt-2">
 
                     <h2 class="font-condensed mb-3" v-if="itemType == 'movie'">{{ itemObj.title }}</h2>
@@ -66,7 +67,7 @@ export default {
                         <i v-for="star in (5 - voteConverter())" class="fa-regular fa-star"></i>
                     </div>
 
-                    <p class="description">
+                    <p class="description text-lightgrey">
                         {{ itemObj.overview }}
                     </p>
 
@@ -77,7 +78,8 @@ export default {
                         </div>
                         <div class="actions">
                             <button class="btn-icon mr-3"><i class="fa-solid fa-thumbs-up"></i></button>
-                            <button class="btn-icon"><i class="fa-solid fa-plus"></i></button>
+                            <button class="btn-icon" @click="$emit('toggle-modal')"><i
+                                    class="fa-solid fa-up-right-and-down-left-from-center"></i></button>
                         </div>
                     </div>
 

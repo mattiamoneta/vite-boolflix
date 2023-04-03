@@ -4,6 +4,9 @@
 import { store } from '../store';
 
 import PosterItem from './PosterItem.vue';
+import AppModal from './AppModal.vue';
+import { registerRuntimeHelpers } from '@vue/compiler-core';
+import axios from 'axios';
 
 
 export default {
@@ -12,33 +15,75 @@ export default {
         return {
             store,
             moviesGenre: 0,
-            seriesGenre: 0
+            seriesGenre: 0,
+            emits: ['moviesGenre', 'seriesGenre']
         }
     },
     methods: {
+        handleScroll(e) {
+            this.store.scrollPos = window.scrollY;
+        },
         setBackground(path) {
             this.store.fullscreenBackground = `https://image.tmdb.org/t/p/w500${path}`;
         },
 
-        getMovieGenreString() {
-            if (this.store.respMovies.length > 0) {
+        toggleModal(obj) {
 
+            this.store.modalObj = obj;
+            this.store.modalCastObj = [];
+
+            if (obj.original_name == undefined) {
+                axios.get(`https://api.themoviedb.org/3/movie/${obj.id}/credits?api_key=${this.store.apiKey}&language=${this.store.searchLanguage}`)
+                    .then(response => {
+
+                        for (let i = 0; i < 5; i++) {
+                            if (response.data.cast[i].known_for_department == 'Acting') {
+                                this.store.modalCastObj.push(response.data.cast[i]);
+                            }
+                        }
+
+                    });
+
+            } else {
+                axios.get(`https://api.themoviedb.org/3/tv/${obj.id}/credits?api_key=${this.store.apiKey}&language=${this.store.searchLanguage}`)
+                    .then(response => {
+                        for (let i = 0; i < 5; i++) {
+                            if (response.data.cast[i].known_for_department == 'Acting') {
+                                this.store.modalCastObj.push(response.data.cast[i]);
+                            }
+                        }
+                    });
+
+            }
+
+
+
+
+            if (this.store.showModal) {
+                this.store.showModal = false;
+            } else {
+                this.store.showModal = true;
             }
         }
     },
     components: {
-        PosterItem
+        PosterItem,
+        AppModal
+    },
+    created() {
+        window.addEventListener('scroll', this.handleScroll);
     }
 }
 </script>
 
 <template>
+    <AppModal v-if="store.showModal == true && store.modalObj != null" />
     <div v-show="store.respMovies.length > 0 || store.respSeries.length > 0"
         class="wrapper-lg py-5 p-relative poster-collection">
 
         <div class="row justify-content-between align-items-end p-5 mb-5">
             <div class="title-wrapper">
-                <h1 class="text-white font-light d-inlineblock v-center">Film</h1>
+                <h1 class="text-white font-light d-inlineblock v-center font-conden">Film</h1>
                 <span class="v-super text-white ml-5 text-lightgrey genre-badge">{{ store.stringCurMoviesGenre }}</span>
             </div>
             <div class="select-wrapper">
@@ -53,18 +98,18 @@ export default {
 
         <ul class="row overflow-x py-5 poster-list">
             <PosterItem v-if="store.filteredMovies.length > 0" v-for="(item) in store.filteredMovies" :itemObj="item"
-                itemType="movie" @mouseover="setBackground(item.poster_path)" />
+                itemType="movie" @mouseover="setBackground(item.poster_path)" @toggle-modal="toggleModal(item)" />
             <li v-else-if="store.filteredNoMoviesRes == true">
                 <h2 class="text-white p-5">Nessun titolo trovato.</h2>
             </li>
             <PosterItem v-else v-for="(item) in store.respMovies" :itemObj="item" itemType="movie"
-                @mouseover="setBackground(item.poster_path)" />
+                @mouseover="setBackground(item.poster_path)" @toggle-modal="toggleModal(item)" />
         </ul>
 
 
         <div class="row justify-content-between align-items-end p-5 mb-5">
 
-            <div class="title-wrapper">
+            <div class="title-wrapper mt-6">
                 <h1 class="text-white font-light d-inlineblock v-center">Serie</h1>
                 <span class="v-super text-lightgrey ml-5 genre-badge">{{ store.stringCurSeriesGenre }}</span>
             </div>
@@ -82,12 +127,12 @@ export default {
 
         <ul class="row overflow-x py-5 poster-list">
             <PosterItem v-if="store.filteredSeries.length > 0" v-for="(item) in store.respSeries" :itemObj="item"
-                itemType="tv" @mouseover="setBackground(item.poster_path)" />
+                itemType="tv" @mouseover="setBackground(item.poster_path)" @toggle-modal="toggleModal(item)" />
             <li v-else-if="store.filteredNoSeriesRes == true">
                 <h2 class="text-white p-5">Nessun titolo trovato.</h2>
             </li>
             <PosterItem v-else v-for="(item) in store.respSeries" :itemObj="item" itemType="tv"
-                @mouseover="setBackground(item.poster_path)" />
+                @mouseover="setBackground(item.poster_path)" @toggle-modal="toggleModal(item)" />
         </ul>
 
     </div>

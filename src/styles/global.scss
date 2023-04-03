@@ -5,6 +5,7 @@
 @use './partials/controls' as *;
 @use './partials/navbar' as *;
 @use './partials/footer' as *;
+@use './partials/modal' as *;
 
 @import "@fontsource/roboto";
 @import "@fontsource/roboto-condensed";
@@ -42,6 +43,10 @@ h1 {
 
 .font-light {
     font-weight: lighter;
+}
+
+.font-italic {
+    font-style: italic;
 }
 
 .small {

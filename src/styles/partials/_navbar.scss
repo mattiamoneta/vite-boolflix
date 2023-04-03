@@ -1,6 +1,9 @@
 // Dependencies
 @use './colors' as *;
 
+$padding-fix-top: 100px;
+$padding-fix-bottom: 80px;
+
 /* Navbar */
 
 header {
@@ -18,20 +21,19 @@ header {
 }
 
 .navbar-fix {
-    padding-top: 100px;
-    padding-bottom: 80px;
+    padding-top: $padding-fix-top;
+    padding-bottom: $padding-fix-bottom;
 }
 
-.user-profile{
+.user-profile {
     display: inline-block;
     width: 40px;
     vertical-align: middle;
     margin-left: 50px;
 
-    & img{
+    & img {
         width: 100%;
         object-fit: contain;
         border-radius: 5px;
     }
 }
-

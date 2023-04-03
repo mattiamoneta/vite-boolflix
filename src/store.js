@@ -24,7 +24,14 @@ export const store = reactive({
 
     currentYear: new Date().getFullYear(),
 
-    fullscreenBackground: ''
+    fullscreenBackground: '',
+
+    modalObj: null,
+    modalCastObj: [],
+    showModal: false,
+    scrollPos: 0
+    
+
 
 });
 

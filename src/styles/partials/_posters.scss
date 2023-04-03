@@ -1,5 +1,6 @@
 // Dependencies
 @use './colors' as *;
+$radius : 8px;
 
 
 /* Poster Collection */
@@ -31,7 +32,7 @@
 
 /* Poster Component */
 
-.title-undefined{
+.title-undefined {
     position: absolute;
     color: white;
     bottom: 20%;
@@ -45,15 +46,16 @@
 
 .poster {
     //Poster variables
-    $radius : 8px;
+ 
 
 
     padding: 10px 20px;
     position: relative;
 
-    // &:hover+.poster {
-    //     margin-left: 300px;
-    // }
+
+    &:first-child:hover {
+        margin-left: 20px;
+    }
 
 
 
