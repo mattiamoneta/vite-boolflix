@@ -29,8 +29,9 @@ export const store = reactive({
     modalObj: null,
     modalCastObj: [],
     showModal: false,
-    scrollPos: 0
-    
+    scrollPos: 0,
+
+    favourites: []
 
 
 });

@@ -15,9 +15,77 @@ header {
 
 }
 
+.navbar-left {
+
+    & .dropdown {
+        margin-left: 50px;
+        position: relative;
+        display: inline-block;
+
+        & a {
+            text-decoration: none;
+            color: white;
+            transition: all .2s ease;
+
+            &:hover {
+                color: $color-dark-3;
+            }
+        }
+
+        & .dropdown-menu {
+            position: absolute;
+            left: 0;
+            top: 25px;
+            width: 500px;
+            max-height: 400px;
+            background-color: $color-bg;
+            border: 1px solid $color-dark-2;
+            border-radius: 10px;
+            overflow-y: auto;
+            animation: dropdown .1s ease;
+
+            & ul li {
+
+                list-style-type: none;
+                padding: 5px 10px;
+                position: relative;
+
+                & img {
+                    height: 80px;
+                    border-radius: 5px;
+                    vertical-align: middle;
+                }
+
+                & .info {
+                    display: inline-block;
+                }
+
+                & .delete-item {
+                    color: white;
+                    position: absolute;
+                    right: 25px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    transition: all .2s ease;
+
+                    &:hover {
+                        cursor: pointer;
+                        color: $color-dark-3;
+                    }
+                }
+
+            }
+
+        }
+    }
+
+
+}
+
 .nav-logo {
     height: 55px;
     padding: 10px;
+    vertical-align: middle;
 }
 
 .navbar-fix {
@@ -35,5 +103,16 @@ header {
         width: 100%;
         object-fit: contain;
         border-radius: 5px;
+    }
+}
+
+@keyframes dropdown {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    100% {
+        opacity: 1;
     }
 }

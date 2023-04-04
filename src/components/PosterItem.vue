@@ -1,8 +1,11 @@
 <script>
+import { store } from '../store';
+
 export default {
     name: 'PosterItem',
     data() {
         return {
+            store,
             emits: ['toggle-modal']
         }
     },
@@ -30,6 +33,46 @@ export default {
         },
         voteConverter() {
             return Math.round(this.itemObj.vote_average / 2);
+        },
+        addToFavourites() {
+
+            let poster_url = "";
+
+            if (this.itemObj.poster_path !== null) {
+                poster_url = `https://image.tmdb.org/t/p/w500${this.itemObj.poster_path}`;
+            } else {
+                poster_url = "/poster-empty.jpg";
+            }
+
+
+            if (this.itemObj.title !== undefined) {
+
+                if (!this.store.favourites.filter(e => e.title === this.itemObj.title).length > 0) {
+                    this.store.favourites.push({
+                        title: this.itemObj.title,
+                        poster: poster_url
+                    });
+
+                    alert('Aggiunto a La mia Lista');
+                } else {
+                    alert('Già presente nella lista!');
+                }
+
+            } else {
+
+                if (!this.store.favourites.filter(e => e.name === this.itemObj.name).length > 0) {
+                    this.store.favourites.push({
+                        title: this.itemObj.name,
+                        poster: poster_url
+                    });
+
+                    alert('Aggiunto a La mia Lista');
+                } else {
+                    alert('Già presente nella lista!');
+                }
+            }
+
+
         }
     }
 }
@@ -77,7 +120,8 @@ export default {
                             <span v-else>{{ itemObj.original_language }}</span>
                         </div>
                         <div class="actions">
-                            <button class="btn-icon mr-3"><i class="fa-solid fa-thumbs-up"></i></button>
+                            <button class="btn-icon mr-3"><i class="fa-solid fa-plus"
+                                    @click.stop="addToFavourites"></i></button>
                             <button class="btn-icon"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></button>
                         </div>
                     </div>
