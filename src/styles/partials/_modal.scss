@@ -82,6 +82,20 @@
                 max-width: 90%;
             }
 
+            & .genres li{
+                display: inline-block;
+                margin-left: 5px;
+                color: white;
+                background-color: $color-dark-2;
+                padding: 3px 8px;
+                border-radius: 10px;
+                font-size: .9rem;
+            }
+
+            & .genres li:first-child{
+                margin-left: 0px;
+            }
+
             & .cast {
 
                 position: absolute;

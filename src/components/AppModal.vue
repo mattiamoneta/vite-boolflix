@@ -7,13 +7,34 @@ export default {
     name: 'AppModal',
     data() {
         return {
-            store
+            store,
+            currentGenres: []
         }
     },
     methods: {
+        // Conversione da decimale a quinario
         voteConverter(obj) {
-            return Math.round(obj.vote_average / 2);
+            return Math.floor(obj.vote_average / 2);
+        },
+        extractGenres() {
+            let filter = [];
+            let genres = this.store.modalObj.genre_ids;
+
+            filter = this.store.respMoviesGenres.genres.filter(e => {
+                if (genres.includes(e.id)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+
+
+            this.currentGenres = filter;
         }
+    },
+
+    mounted() {
+        this.extractGenres();
     }
 }
 
@@ -25,23 +46,30 @@ export default {
         <div class="modal" @click.stop>
             <div class="modal-thumbnail">
                 <div class="overlay"></div>
-                <img v-if="store.modalObj.poster_path != undefined"
-                    :src="`https://image.tmdb.org/t/p/w500${store.modalObj.poster_path}`" alt="">
+                <img v-if="store.modalObj.backdrop_path != undefined"
+                    :src="`https://image.tmdb.org/t/p/w1280${store.modalObj.backdrop_path}`" alt="">
                 <img v-else src="poster-empty.jpg" alt="">
             </div>
             <div class="modal-content text-white">
                 <!-- Titolo -->
                 <h2 v-if="store.modalObj.title != undefined" class="font-condensed mb-2">{{ store.modalObj.title }} </h2>
-                <h2 v-else class="font-condensed">{{ store.modalObj.name }} </h2>
+                <h2 v-else class="font-condensed mb-2">{{ store.modalObj.name }} </h2>
 
                 <h3 v-if="store.modalObj.original_title != undefined" class="font-condensed text-lightgrey mb-2">{{
                     store.modalObj.original_title }} </h3>
-                <h3 v-else class="font-condensed text-lightgrey">{{ store.modalObj.original_name }} </h3>
+                <h3 v-else class="font-condensed text-lightgrey mb-2">{{ store.modalObj.original_name }} </h3>
 
                 <!-- Voto -->
                 <div class="vote text-streaming-red mb-5">
                     <i v-for="star in voteConverter(store.modalObj)" class="fa-solid fa-star"></i>
                     <i v-for="star in (5 - voteConverter(store.modalObj))" class="fa-regular fa-star"></i>
+                </div>
+
+                <!-- Generi -->
+                <div class="genres">
+                    <ul>
+                        <li v-for="genre in currentGenres">#{{ genre.name }} </li>
+                    </ul>
                 </div>
 
                 <!-- Descrizione -->

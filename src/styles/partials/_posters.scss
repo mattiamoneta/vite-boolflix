@@ -5,17 +5,17 @@ $radius : 8px;
 
 /* Poster Collection */
 
-.splash-screen{
+.splash-screen {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 80vh;
     text-align: center;
-    
-    & .logo-inline{
-       height: 30px;
-       margin-top: 50px;
+
+    & .logo-inline {
+        height: 30px;
+        margin-top: 50px;
     }
 }
 
@@ -60,7 +60,7 @@ $radius : 8px;
 
 .poster {
     //Poster variables
- 
+
 
 
     padding: 10px 20px;

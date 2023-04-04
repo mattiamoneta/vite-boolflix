@@ -21,10 +21,12 @@ export default {
     AppFooter
   },
   methods: {
+    // Change Body backdrop image
     defaultBackground(path) {
       this.store.fullscreenBackground = `https://image.tmdb.org/t/p/w500${path}`;
     },
 
+    // Search for Movies and Series
     performSearch() {
 
       if (store.searchQuery != "") {
@@ -34,7 +36,13 @@ export default {
         this.store.filteredSeries = [];
 
         //Query Movies
-        axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.store.apiKey}&language=${this.store.searchLanguage}&query=${this.store.searchQuery}`)
+        axios.get("https://api.themoviedb.org/3/search/movie", {
+          params: {
+            api_key: this.store.apiKey,
+            language: this.store.searchLanguage,
+            query: this.store.searchQuery
+          }
+        })
           .then(response => {
             this.store.respMovies = response.data.results;
 
@@ -45,7 +53,13 @@ export default {
           });
 
         //Query Series
-        axios.get(`https://api.themoviedb.org/3/search/tv?api_key=${this.store.apiKey}&language=${this.store.searchLanguage}&query=${this.store.searchQuery}`)
+        axios.get("https://api.themoviedb.org/3/search/tv", {
+          params: {
+            api_key: this.store.apiKey,
+            query: this.store.searchQuery,
+            language: this.store.searchLanguage
+          }
+        })
           .then(response => {
             this.store.respSeries = response.data.results;
           });
@@ -57,6 +71,7 @@ export default {
 
     },
 
+    // Filter Movies
     filterMoviesGenres(genre) {
 
       this.store.respMoviesGenres.genres.forEach(e => {
@@ -88,8 +103,10 @@ export default {
 
     },
 
+    // Filter Series
     filterSeriesGenres(genre) {
 
+      console.log(genre)
       this.store.respSeriesGenres.genres.forEach(e => {
         if (e.id == genre) {
           this.store.stringCurSeriesGenre = e.name;
@@ -106,6 +123,8 @@ export default {
           }
         });
 
+        console.log(this.store.filteredSeries)
+
         if (this.store.filteredSeries.length > 0) {
           this.store.filteredNoSeriesRes = false;
         } else {
@@ -117,6 +136,7 @@ export default {
 
     },
 
+    // Get all genres
     getGenres() {
       //Query Movies
       axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${this.store.apiKey}&language=${this.store.searchLanguage}`)
