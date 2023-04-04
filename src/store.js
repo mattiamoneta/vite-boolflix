@@ -24,7 +24,7 @@ export const store = reactive({
 
     currentYear: new Date().getFullYear(),
 
-    fullscreenBackground: '',
+    fullscreenBackground: '/default-bg.jpg',
 
     modalObj: null,
     modalCastObj: [],

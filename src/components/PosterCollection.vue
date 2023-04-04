@@ -90,9 +90,9 @@ export default {
 
     <!-- Splash Screen -->
     <div v-show="store.respMovies.length == 0 || store.respSeries.length == 0" class="splash-screen">
-        <i class="fa-3x fa-solid fa-magnifying-glass text-white mb-5"></i>
-        <h2 class="text-white">Per iniziare, digita una chiave di ricerca</h2>
-        <img src="/logo.png" alt="" class="logo-inline">
+        <img src="/sad-logo.png" alt="" class="logo-inline mb-5">
+        <h2 class="text-white">Nessun risultato disponibile</h2>
+        <span class="text-lightgrey mt-3">Usa la barra di ricerca in alto</span>
     </div>
 
 

@@ -26,6 +26,7 @@ export default {
       this.store.fullscreenBackground = `https://image.tmdb.org/t/p/w500${path}`;
     },
 
+
     // Search for Movies and Series
     performSearch() {
 
@@ -65,8 +66,6 @@ export default {
           });
 
         this.store.searchQuery = "";
-
-
       }
 
     },
