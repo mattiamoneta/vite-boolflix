@@ -97,6 +97,7 @@ export default {
         }
       } else {
         this.store.filteredMovies = this.store.respMovies;
+        this.store.filteredNoMoviesRes = false;
       }
 
 
@@ -131,6 +132,7 @@ export default {
         }
       } else {
         this.store.filteredSeries = this.store.respSeries;
+        this.store.filteredNoSeriesRes = false;
       }
 
     },

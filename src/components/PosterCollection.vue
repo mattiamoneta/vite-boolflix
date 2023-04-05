@@ -1,6 +1,7 @@
 <script>
 //Dependencies
 
+
 import { store } from '../store';
 
 import PosterItem from './PosterItem.vue';
@@ -24,6 +25,22 @@ export default {
         // Detect Scroll
         handleScroll(e) {
             this.store.scrollPos = window.scrollY;
+        },
+
+        scrollLeftMovies() {
+            const elMoviesCollection = document.getElementById("moviesList")
+            elMoviesCollection.scrollTo({
+                left: 0,
+                behavior: "smooth",
+            });
+        },
+
+        scrollLeftSeries() {
+            const elSeriesCollection = document.getElementById("seriesList");
+            elSeriesCollection.scrollTo({
+                left: 0,
+                behavior: "smooth",
+            });
         },
 
         // Change Body backdrop image on mouseover
@@ -118,7 +135,7 @@ export default {
             </div>
         </div>
 
-        <ul class="row overflow-x py-5 poster-list">
+        <ul class="row overflow-x py-5 poster-list" id="moviesList">
             <PosterItem v-if="store.filteredMovies.length > 0" v-for="(item) in store.filteredMovies" :itemObj="item"
                 itemType="movie" @mouseover="setBackground(item.backdrop_path, item.poster_path)"
                 @toggle-modal="toggleModal(item)" />
@@ -128,6 +145,14 @@ export default {
             <PosterItem v-else v-for="(item) in store.respMovies" :itemObj="item" itemType="movie"
                 @mouseover="setBackground(item.backdrop_path, item.poster_path)" @toggle-modal="toggleModal(item)"
                 :key="item.id" />
+
+            <li v-if="store.respMovies.length > 0 && store.filteredNoMoviesRes == false" class="poster">
+                <div class="poster-lastchild">
+                    <h2 class="v-center text-white">Non ci sono altri titoli!</h2>
+                    <div class="btn-icon" @click="scrollLeftMovies"><i class="fa-solid fa-arrow-left"></i>
+                    </div>
+                </div>
+            </li>
         </ul>
 
 
@@ -154,7 +179,7 @@ export default {
         </div>
 
         <!-- Movies / Series poster list -->
-        <ul class="row overflow-x py-5 poster-list">
+        <ul class="row overflow-x py-5 poster-list" id="seriesList">
             <PosterItem v-if="store.filteredSeries.length > 0" v-for="(item) in store.filteredSeries" :itemObj="item"
                 itemType="tv" @mouseover="setBackground(item.poster_path)" @toggle-modal="toggleModal(item)" />
             <li v-else-if="store.filteredNoSeriesRes == true">
@@ -162,6 +187,14 @@ export default {
             </li>
             <PosterItem v-else v-for="(item) in store.respSeries" :itemObj="item" itemType="tv"
                 @mouseover="setBackground(item.poster_path)" @toggle-modal="toggleModal(item)" :key="item.id" />
+
+            <li v-if="store.respSeries.length > 0 && store.filteredNoSeriesRes == false" class="poster">
+                <div class="poster-lastchild">
+                    <h2 class="v-center text-white">Non ci sono altri titoli!</h2>
+                    <div class="btn-icon" @click="scrollLeftSeries"><i class="fa-solid fa-arrow-left"></i>
+                    </div>
+                </div>
+            </li>
         </ul>
 
     </div>

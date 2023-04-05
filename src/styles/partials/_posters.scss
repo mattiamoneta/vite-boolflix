@@ -46,6 +46,18 @@ $radius : 8px;
 
 /* Poster Component */
 
+.poster-lastchild{
+    height: 300px;
+    width: 275px;
+    padding-right: 50px;
+    padding-left: 30px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: space-around;
+    border-left: 1px solid $color-dark-2;
+}
+
 .title-undefined {
     position: absolute;
     color: white;
@@ -61,8 +73,6 @@ $radius : 8px;
 .poster {
     //Poster variables
 
-
-
     padding: 10px 20px;
     position: relative;
 
@@ -71,7 +81,9 @@ $radius : 8px;
         margin-left: 20px;
     }
 
-
+    &:nth-last-child(2) .content {
+        flex-direction: row-reverse;
+    }
 
 
     & .content {
