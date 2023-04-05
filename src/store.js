@@ -16,6 +16,7 @@ export const store = reactive({
     respSeriesGenres: [],
     stringCurSeriesGenre: 'Tutti',
 
+    // Filtered Arrays
     filteredMovies: [],
     filteredNoMoviesRes: false,
     filteredSeries: [],
@@ -26,13 +27,18 @@ export const store = reactive({
 
     fullscreenBackground: '/default-bg.jpg',
 
+    // Modal
     modalObj: null,
     modalCastObj: [],
     showModal: false,
     scrollPos: 0,
 
-    favourites: []
+    favourites: [],
 
+    // Message Box
+    showMsgBox: false,
+    msgboxText: '',
+    msgBoxStyle: ''
 
 });
 

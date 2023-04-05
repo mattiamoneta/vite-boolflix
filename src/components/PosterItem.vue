@@ -6,7 +6,8 @@ export default {
     data() {
         return {
             store,
-            emits: ['toggle-modal']
+            emits: ['toggle-modal'],
+            interval: null
         }
     },
     props: {
@@ -53,9 +54,13 @@ export default {
                         poster: poster_url
                     });
 
-                    alert('Aggiunto a La mia Lista');
+                    this.store.msgboxText = "Aggiunto a La mia Lista";
+                    this.store.showMsgBox = true;
+                    this.store.msgBoxStyle = 'success';
                 } else {
-                    alert('Già presente nella lista!');
+                    this.store.msgboxText = "Già presente nella lista";
+                    this.store.showMsgBox = true;
+                    this.store.msgBoxStyle = 'danger';
                 }
 
             } else {
@@ -66,13 +71,27 @@ export default {
                         poster: poster_url
                     });
 
-                    alert('Aggiunto a La mia Lista');
+                    this.store.msgboxText = "Aggiunto a La mia Lista";
+                    this.store.showMsgBox = true;
+                    this.store.msgBoxStyle = 'success';
                 } else {
-                    alert('Già presente nella lista!');
+                    this.store.msgboxText = "Già presente nella lista";
+                    this.store.showMsgBox = true;
+                    this.store.msgBoxStyle = 'danger';
                 }
+
             }
 
+            this.msgBoxTimer();
 
+
+        },
+
+        msgBoxTimer() {
+            this.store.showMsgBox = true;
+            this.interval = setTimeout(e => {
+                this.store.showMsgBox = false;
+            }, 1500);
         }
     }
 }

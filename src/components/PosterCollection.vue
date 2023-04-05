@@ -6,6 +6,7 @@ import { store } from '../store';
 
 import PosterItem from './PosterItem.vue';
 import AppModal from './AppModal.vue';
+import AppMessageBox from './AppMessageBox.vue';
 import { registerRuntimeHelpers } from '@vue/compiler-core';
 import axios from 'axios';
 
@@ -93,7 +94,8 @@ export default {
     },
     components: {
         PosterItem,
-        AppModal
+        AppModal,
+        AppMessageBox
     },
     created() {
         window.addEventListener('scroll', this.handleScroll);
@@ -104,6 +106,9 @@ export default {
 <template>
     <!-- Modal -->
     <AppModal v-if="store.showModal == true && store.modalObj != null" />
+
+    <!-- Message Box -->
+    <AppMessageBox v-show="store.showMsgBox == true" />
 
     <!-- Splash Screen -->
     <div v-show="store.respMovies.length == 0 || store.respSeries.length == 0" class="splash-screen">

@@ -6,6 +6,7 @@
 @use './partials/navbar' as *;
 @use './partials/footer' as *;
 @use './partials/modal' as *;
+@use './partials/msgbox' as *;
 
 @import "@fontsource/roboto";
 @import "@fontsource/roboto-condensed";
@@ -53,6 +54,6 @@ h1 {
     font-size: .8rem;
 }
 
-.text-uppercase{
+.text-uppercase {
     text-transform: uppercase;
 }

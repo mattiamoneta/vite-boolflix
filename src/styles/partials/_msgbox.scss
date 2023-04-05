@@ -1,0 +1,48 @@
+// Dependencies
+@use './colors' as *;
+
+/* MsgBox */
+.msgbox {
+    position: sticky;
+    top: 100px;
+    width: 400px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 15px;
+    background-color: rgba($color-dark-1, .9);
+    z-index: 999;
+    animation: msgboxAnim 1s ease;
+
+    &.danger {
+        border: 1px solid $color-streaming-red;
+        color: $color-pink;
+
+    }
+
+    &.danger::before {
+        font: var(--fa-font-solid);
+        margin-right: 8px;
+        content: '\f06a';
+    }
+
+    &.success {
+        border: 1px solid $color-lightgreen;
+        color: $color-green;
+    }
+
+    &.success::before {
+        font: var(--fa-font-solid);
+        margin-right: 8px;
+        content: '\f00c';
+    }
+}
+
+@keyframes msgboxAnim {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
