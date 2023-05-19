@@ -18,6 +18,8 @@ THUMBNAIL GIF
 SHIELDS.IO
 -->
 <p align="center">
+  <a href="https://vuejs.org/"><img src="https://img.shields.io/badge/-VueJS3-4FC08D?logo=vue.js&logoColor=white" alt="VueJS3"></a>
+  
   [![](https://img.shields.io/badge/-VueJS3-4FC08D?logo=vue.js&logoColor=white)](https://vuejs.org/)
   [![](https://img.shields.io/badge/-HTML5-E34F26?logo=html5&logoColor=white)](https://vuejs.org/)
   [![](https://img.shields.io/badge/-CSS3-1572B6?logo=css3&logoColor=white)](https://vuejs.org/)
