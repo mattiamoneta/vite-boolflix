@@ -1,4 +1,6 @@
-# Boolflix
+<p align="center">
+  <img src="https://github.com/mattiamoneta/vite-boolflix/blob/master/public/logo.png" alt="Boolflix" height="50px"/>
+</p>
 <p align="center">
   <img src="https://github.com/mattiamoneta/vite-boolflix/blob/master/thumbnail.gif" alt="Boolflix"/>
 </p>
